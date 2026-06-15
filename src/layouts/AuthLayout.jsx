@@ -10,10 +10,10 @@ const AuthLayout = () => {
         <nav>
           <NavBar></NavBar>
         </nav>
-        <main>
-          <Outlet></Outlet>
-        </main>
       </header>
+      <main>
+        <Outlet></Outlet>
+      </main>
       <footer>
         <Footer></Footer>
       </footer>
