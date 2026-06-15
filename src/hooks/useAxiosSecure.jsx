@@ -66,7 +66,7 @@ const useAxiosSecure = () => {
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     const responseIntercept = axiosSecure.interceptors.response.use(
@@ -79,7 +79,7 @@ const useAxiosSecure = () => {
           logOut().catch((err) => console.error("Logout error", err));
         }
         return Promise.reject(error);
-      }
+      },
     );
 
     // Eject on unmount
