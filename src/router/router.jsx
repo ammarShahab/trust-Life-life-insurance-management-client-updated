@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router";
+import { ScrollRestoration } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import LogIn from "../pages/Authentication/LogIn/LogIn";
 import Register from "../pages/Authentication/Register/Register";
@@ -38,7 +39,12 @@ import PublicRoute from "../routes/PublicRoute";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout></RootLayout>,
+    element: (
+      <>
+        <ScrollRestoration />
+        <RootLayout></RootLayout>
+      </>
+    ),
     children: [
       { index: true, element: <Home></Home> },
       {
