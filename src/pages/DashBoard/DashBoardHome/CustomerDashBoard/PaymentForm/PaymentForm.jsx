@@ -1,14 +1,14 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../../components/Loading/Loading";
 import useAuth from "../../../../../hooks/useAuth/useAuth";
 import Swal from "sweetalert2";
 
-const PaymentForm = () => {
-  const { state } = useLocation();
+const PaymentForm = ({ state }) => {
+  // const { state } = useLocation();
   // console.log("state from payment form", state);
   const stripe = useStripe();
   const elements = useElements();
@@ -23,7 +23,7 @@ const PaymentForm = () => {
     enabled: !!applicationId,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/policy-applications/${applicationId}`
+        `/policy-applications/${applicationId}`,
       );
       return res.data;
     },
@@ -37,8 +37,8 @@ const PaymentForm = () => {
 
   // console.log("application id", applicationId);
   const amountInDecimal = parseFloat(state?.premium);
-  const amount = amountInDecimal;
-  const paymentDuration = state?.paymentType;
+  const amount = amountInDecimal * 100;
+  const paymentDuration = state?.paymentDuration;
 
   // console.log(amount);
   // console.log(paymentDuration);
@@ -69,11 +69,13 @@ const PaymentForm = () => {
     } else {
       // console.log("Payment Method", paymentMethod);
       setError("");
+      console.log("Creating payment intent with amount:", amount);
       const res = await axiosSecure.post("/create-payment-intent", {
         amount,
         applicationId,
         paymentDuration,
       });
+      console.log("Payment intent response:", res.data);
       // console.log("res from intent", res);
 
       const clientSecret = res.data.clientSecret;
@@ -91,8 +93,11 @@ const PaymentForm = () => {
 
         setError(result.error.message);
         //   setSucceeded(false);
-      } else {
+      }       else {
         setError("");
+        console.log("Payment result", result);
+        console.log("Payment intent status:", result.paymentIntent.status);
+        console.log("Payment intent ID:", result.paymentIntent.id);
         if (result.paymentIntent.status === "succeeded") {
           // The payment has been processed!
           // setError(null);
@@ -109,14 +114,16 @@ const PaymentForm = () => {
             email: user.email,
             amount,
             transactionId: transactionId,
-            paymentMethod: result.paymentIntent.payment_method_types,
+            paymentMethod: result.paymentIntent.payment_method,
             paymentDuration,
             status: applicationInfo.status,
           };
 
-          // console.log("payment data", paymentData);
+          console.log("Payment data being sent:", paymentData);
 
+          console.log("Sending payment to /payments endpoint...");
           const paymentRes = await axiosSecure.post("/payments", paymentData);
+          console.log("Payment response:", paymentRes.data);
           if (paymentRes.data.insertedId) {
             // console.log("Successfully Paid for the parcel");
             Swal.fire({

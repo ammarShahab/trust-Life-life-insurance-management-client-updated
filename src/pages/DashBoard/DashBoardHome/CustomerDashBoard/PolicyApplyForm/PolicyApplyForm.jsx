@@ -21,6 +21,7 @@ const PolicyApplyForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log("Form state:", state);
     const applicationData = {
       name: user?.displayName || "Unknown",
       email: user?.email || "Unknown",
@@ -40,21 +41,30 @@ const PolicyApplyForm = () => {
       status: "pending",
     };
 
-    // console.log(applicationData);
+    console.log("Application data:", applicationData);
 
     try {
       const res = await axiosSecure.post(
         "/policy-applications",
-        applicationData
+        applicationData,
       );
-      if (res.data.insertedId) {
+      console.log("Application response:", res.data);
+
+      // Check for insertedId (from backend) or _id (fallback)
+      if (res.data.insertedId || res.data._id) {
+        console.log(
+          "Application submitted successfully, redirecting to payment-status",
+        );
         Swal.fire("Success", "Application submitted successfully!", "success");
         reset();
         navigate("/dashboard/payment-status");
       }
     } catch (err) {
-      console.error(err);
-      Swal.fire("Error", "You already applied for this policy.", "error");
+      console.error("Application error:", err);
+      const errorMessage =
+        err.response?.data?.message ||
+        "Something went wrong. Please try again.";
+      Swal.fire("Error", errorMessage, "error");
     }
   };
 

@@ -45,7 +45,7 @@ const PaymentStatus = () => {
         applicationId: id,
         policyTitle: app.policyTitle,
         policyId: app.policyId,
-        paymentType: mode,
+        paymentDuration: mode,
         premium,
         customerEmail: app.email,
       },
@@ -125,7 +125,7 @@ const PaymentStatus = () => {
                           }
                         >
                           <option value="monthly">Monthly</option>
-                          <option>Yearly</option>
+                          <option value="yearly">Yearly</option>
                         </select>
                       </td>
                       <td className="p-3 text-gray-800 dark:text-gray-300">
@@ -134,7 +134,7 @@ const PaymentStatus = () => {
                       <td className="p-3">
                         <span
                           className={`text-xs font-semibold px-2.5 py-0.5 rounded ${getBadgeColor(
-                            app.status === "pending" ? "due" : "paid"
+                            app.status === "pending" ? "due" : "paid",
                           )}`}
                         >
                           {app.status === "pending" ? "Due" : "Paid"}
