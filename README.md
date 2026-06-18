@@ -1,31 +1,19 @@
-<!-- todo -->
-
-Claimform page submission button will not showing sweet alert and not redirecting to routes
-
 # 🛡️ Trust Life – Client Side
 
 **Trust Life** is a comprehensive life insurance management platform, built with modern web technologies. It empowers users to explore, compare, and purchase various insurance policies with secure transactions and seamless user experience.
-
----
 
 ## 🌐 Live Site
 
 🔗 [Visit Trust Life](https://b11-a12-trust-life-client.web.app/)
 
----
-
 ## 🔐 Admin Login Credentials
 
-Email: admin1@admin.com
-Password: Admin12345
-
----
+- **Email:** admin1@admin.com
+- **Password:** Admin12345
 
 ## 🎯 Project Purpose
 
 Trust Life is designed to offer a reliable, intuitive, and responsive insurance booking solution. It ensures transparency and ease for both customers and administrators through well-integrated features and a sleek UI.
-
----
 
 ## ✨ Key Features
 
@@ -35,8 +23,6 @@ Trust Life is designed to offer a reliable, intuitive, and responsive insurance 
 - 📊 Efficient policy, application, and user management across different roles
 - 🧾 Real-time status tracking for policy applications (Pending, Approved, Rejected)
 - 🧑‍💼 Agent assignment system for handling and reviewing customer applications
-
----
 
 ## 🛠️ Tech Stack
 
@@ -60,8 +46,8 @@ Trust Life is designed to offer a reliable, intuitive, and responsive insurance 
 - `react-hot-toast`, `sweetalert2` – Notifications & modals
 - `react-fast-marquee`, `react-slick`, `slick-carousel` – Sliders & marquees
 - `react-hook-form` – Form validation & control
-- `react-icons`, – Icons
-- `date-fns` – date utilities
+- `react-icons` – Icons
+- `date-fns` – Date utilities
 - `react-helmet-async` – Dynamic SEO tags
 
 #### 🧪 Dev Dependencies
@@ -71,22 +57,16 @@ Trust Life is designed to offer a reliable, intuitive, and responsive insurance 
 - `eslint-plugin-react-hooks`, `react-refresh` – Hook safety and fast refresh
 - `@types/react`, `@types/react-dom`, `globals` – TypeScript compatibility
 
----
-
 ## 📂 Scripts
 
 | Command       | Description              |
 | ------------- | ------------------------ |
 | `npm run dev` | Start development server |
 
----
-
 ## 🧑‍💻 Author
 
 Developed by **Ammar Shahab**  
 📫 Email: [ashahab007@gmail.com]
-
----
 
 ## 📝 License
 
