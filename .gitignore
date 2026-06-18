@@ -1,5 +1,6 @@
 # Logs
 .env.local
+firbase_admin_key.json
 logs
 *.log
 npm-debug.log*
