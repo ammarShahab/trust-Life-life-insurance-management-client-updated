@@ -10,7 +10,8 @@ const AllPolicies = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("default"); // 'default' | 'asc' | 'desc'
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
   const limit = 8;
 
   const { data, isLoading } = useQuery({
