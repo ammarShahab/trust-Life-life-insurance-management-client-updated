@@ -37,7 +37,7 @@ const PolicyQuotePage = () => {
     if (gender === "female") rate -= 0.01;
 
     const monthly = ((coverage / 10000) * rate).toFixed(2) * 100;
-    const yearly = (monthly * 12).toFixed(2) * 100;
+    const yearly = monthly * 12; // Fixed: removed .toFixed(2) * 100
 
     setResult({ monthly, yearly, coverage, duration });
   };
@@ -97,9 +97,7 @@ const PolicyQuotePage = () => {
         </div>
 
         <div>
-          <label className="block mb-1 font-medium dark:text-gray-300">
-            Coverage Amount (৳)
-          </label>
+          <label className="block mb-1 font-medium dark:text-gray-300">Coverage Amount (৳)</label>
           <input
             type="number"
             {...register("coverage", { required: true })}

@@ -22,7 +22,7 @@ const GetFreeQuote = () => {
     if (gender === "female") rate -= 0.01;
 
     const monthlyPremium = ((coverage / 10000) * rate).toFixed(2) * 100;
-    const annualPremium = (monthlyPremium * 12).toFixed(2) * 100;
+    const annualPremium = monthlyPremium * 12;
 
     setPremium({
       monthly: monthlyPremium,
