@@ -36,8 +36,19 @@ const AssignedCustomers = () => {
       );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["assigned-applications"]);
+      queryClient.invalidateQueries({ queryKey: ["assigned-applications"] });
       Swal.fire("✅ Updated!", "Application status updated.", "success");
+    },
+    onError: (error) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong. Please try again.";
+      Swal.fire("❌ Error", message, "error");
+    },
+    onSettled: () => {
+      // Always refetch to keep UI in sync regardless of success or error
+      queryClient.invalidateQueries({ queryKey: ["assigned-applications"] });
     },
   });
 
