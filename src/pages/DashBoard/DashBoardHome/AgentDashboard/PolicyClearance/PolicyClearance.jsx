@@ -94,7 +94,7 @@ const PolicyClearance = () => {
               </tr>
             </thead>
             <tbody>
-              {claims.map((app) => (
+              {[...claims].sort((a, b) => b._id.localeCompare(a._id)).map((app) => (
                 <tr
                   key={app._id}
                   className={`bg-white border-b hover:bg-gray-50 transition  dark:bg-gray-500 dark:text-gray-300 dark:hover:bg-gray-600`}
